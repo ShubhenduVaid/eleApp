@@ -1,0 +1,18 @@
+<div class="page-style">
+  <mat-card class="login-card">
+    <mat-card-header class="login-header">
+      <mat-card-title>Login Page</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <mat-form-field class="login-full-width left">
+          <input type="text" matInput placeholder="Username" formControlName="userName">
+        </mat-form-field>
+        <mat-form-field class="login-full-width left">
+          <input type="password" matInput placeholder="Password" formControlName="password">
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="login-button" type="submit" [disabled]="!loginForm.valid">Login</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
