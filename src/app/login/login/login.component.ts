@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import { LoginService } from './login.service';
 import { LoginData } from './login.model';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private snackBar: MatSnackBar,
     private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -33,6 +35,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (data: LoginData) => {
           if (data.accessToken) {
+            this.authService.setToken(data.accessToken);
             this.router.navigate(['/list']);
           }
           this.openSnackBar(data.result);

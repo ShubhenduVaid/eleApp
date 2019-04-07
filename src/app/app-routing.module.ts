@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login/login.component';
+import { AuthGuard } from './core/auth-guard.service';
 
 const routes: Routes = [
   {
     path: 'list',
     loadChildren: './../app/list/list.module#ListModule',
+    canActivate: [AuthGuard],
   },
   {
     path: 'login',
