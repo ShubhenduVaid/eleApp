@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+  <h3>Edit Elevator Code</h3>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.elevatorCode" required>
+    <mat-error>Required Field cannot be empty</mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button cdkFocusInitial (click)="onEdit()">Edit</button>
+</div>

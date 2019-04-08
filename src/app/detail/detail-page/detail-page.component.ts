@@ -58,6 +58,19 @@ export class DetailPageComponent implements OnInit {
       );
   }
 
+  onEditDetail(row: DetailData) {
+    this.detailService.editElevatorDetailsByID(row)
+      .subscribe(
+        (data: DetailData) => {
+          this.detailData = data;
+          this.elevatorStats(this.id);
+        },
+        (error) => {
+          this.openSnackBar('Unable to edit elevator details.');
+        }
+      );
+  }
+
   openSnackBar(message: string) {
     this.snackBar.open(message, '', {
       duration: 2000,

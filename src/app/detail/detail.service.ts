@@ -32,6 +32,20 @@ export class DetailService {
       );
   }
 
+  editElevatorDetailsByID(row: DetailData): Observable<DetailData> {
+    const url = `elevator/${row.id}`;
+    const body = {
+      elevatorCode: row.elevatorCode,
+      buildingName: row.buildingName,
+      statusCode: row.statusCode,
+      account: 1
+    };
+    return this.http.put<DetailData>(url, body, this.authService.getHeader())
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   private handleError() {
     return throwError('Unable to fetch data. Try Again.');
   }

@@ -1,14 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { DetailData } from '../detail.model';
+import { MatDialog } from '@angular/material/dialog';
+import { DetailEditComponent } from '../detail-edit/detail-edit.component';
 
 @Component({
   selector: 'app-detail-grid',
   templateUrl: './detail-grid.component.html',
   styleUrls: ['./detail-grid.component.css']
 })
-export class DetailGridComponent implements OnInit {
+export class DetailGridComponent {
 
   dataSource: MatTableDataSource<DetailData>;
 
@@ -18,8 +20,11 @@ export class DetailGridComponent implements OnInit {
     'elevatorCode',
     'statusCode',
     'statusDescription',
-    'lastUpdated'
+    'lastUpdated',
+    'action'
   ];
+
+  @Output() editEvent = new EventEmitter<DetailData>();
 
   @Input()
   set detailData(data: DetailData) {
@@ -29,9 +34,22 @@ export class DetailGridComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
-  ngOnInit() {
+  onEdit(row: DetailData) {
+    this.openDialog(row);
   }
 
+  openDialog(row: DetailData): void {
+    const dialogRef = this.dialog.open(DetailEditComponent, {
+      width: '250px',
+      data: { ...row }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result !== 'Cancel') {
+        this.editEvent.emit(result);
+      }
+    });
+  }
 }
