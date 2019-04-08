@@ -1,4 +1,4 @@
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z6 tableContainer">
   <table mat-table [dataSource]="dataSource">
 
     <!-- Position Column -->
@@ -38,10 +38,6 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="onRowClick(row.id)"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-
-  <mat-paginator class="mat-paginator-sticky" showFirstLastButtons #paginator [pageSizeOptions]="[15, 20, 25]"
-    (page)="changePage($event)">
-  </mat-paginator>
 </div>

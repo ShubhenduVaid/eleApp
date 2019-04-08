@@ -12,6 +12,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'detail/:id',
+    loadChildren: './../app/detail/detail.module#DetailModule',
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'login',
     component: LoginComponent
   },
