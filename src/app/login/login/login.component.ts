@@ -15,6 +15,7 @@ import { AuthService } from 'src/app/core/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  loginData;
 
   constructor(
     private loginService: LoginService,
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (data: LoginData) => {
           if (data.accessToken) {
+            this.loginData = data;
             this.authService.setToken(data.accessToken);
             this.router.navigate(['/list']);
           }

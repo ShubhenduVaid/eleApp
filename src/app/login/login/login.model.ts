@@ -3,6 +3,7 @@ export interface LoginData {
   accessToken: string;
   expiryInSeconds: number;
   result: string;
+  refreshToken: string;
 }
 
 export interface LoginRequest {
